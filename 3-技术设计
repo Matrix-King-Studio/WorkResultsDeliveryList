@@ -1,0 +1,47 @@
+# 架构设计组成部分
+
+- 必要章节
+  - 程序组织，架构图
+  - 主要的类，主要的数据表结构
+  - 重要的业务规则
+  - 可替代方案，为什么没有选择的原因
+  - 可伸缩性
+  - 互用性
+  - 输入输出, message delivery semantic
+  - 错误处理
+    - 被动还是主动
+    - 纠正还是检测
+    - 如何处理异常
+    - 各个程序对于输入数据有效性负什么责任
+  - 容错性
+  - 自己开发还是用第三方软件
+
+# 技术设计checklist
+
+- 必要章节
+  - 技术设计选型（如有新引入的框架、系统模块等）
+  - 画出主要系统模块的[模块拓扑关系图](https://en.wikipedia.org/wiki/Component_diagram)
+    - 通过[Draw.io](https://app.diagrams.net/)画图，保存到项目代码仓库的根目录的`docs/component_diagram`路径下；
+  - 画出主要系统模块的流程图
+    - 通过[Draw.io](https://app.diagrams.net/)画图，保存到项目代码仓库的根目录的`docs/flow_chart`路径下；
+  - 画出重要业务逻辑的[时序图](https://en.wikipedia.org/wiki/Sequence_diagram)
+    - 通过[Draw.io](https://app.diagrams.net/)画图，保存到项目代码仓库的根目录的`docs/sequence_diagram`路径下；
+  - 画出业务模型（数据库表结构）设计ER 图
+    - 通过[Draw.io](https://app.diagrams.net/)画图或者数据库导出，保存到项目代码仓库的根目录的`docs/db_schema_design`路径下；
+  - 接口文档，通过 Apipost 导出，保存到项目代码仓库的根目录的`docs/api`路径下；
+  - 算法设计（如无必要，默认不做），保存到项目代码仓库的根目录的`docs/algorithm_design`路径下；
+  - 测试用例设计，保存到项目代码仓库的根目录的`docs/test_case_design`路径下；
+  - 开发、测试、生产环境中的各服务端口规划，保存到项目代码仓库的根目录的`docs/port_design`路径下；
+    - web：8101/tcp，8102/tcp（公网）
+    - django：8103/tcp（内网）
+    - mysql：8106/tcp（内网）
+    - minio：8107/tcp（公网）
+- 沟通内容：编写技术设计部分的技术同事负责，发起技术设计讨论会，必须包含tech leader、项目经理在场；
+
+# 技术设计中一些常见问题
+
+- 是否有书面写下重要的架构设计选择及权衡的利弊因素？
+- 是否有列表写下重要的技术选型调研和思考？
+- 关于技术选型
+  - 避免引入ECS、RDS、OSS外的特定阿里云产品
+  - 我们的产品经常需要私有部署，所以为统一云端和私有部署的环境，统一只采用ECS、RDS、OSS这些服务，私有部署时可以直接通过转化为Linux、MySQL、minio
